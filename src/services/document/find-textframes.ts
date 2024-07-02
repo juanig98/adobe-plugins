@@ -1,24 +1,21 @@
-import { ViewPreference } from "../../core/view-preferences";
-import { IFont, TextFrameData } from "./../../models/types";
-import { cmyk2rgb, rgb2cmyk, rgb2hex } from "../../core/helpers";
+import { global } from '../../core/global';
+import { cmyk2rgb, rgb2hex } from "../../core/helpers";
+import { IFont, PageData, TextFrameData } from "./../../models/types";
 
-export async function findTextFrames(instance: TextFrame): Promise<TextFrameData> {
+export async function findTextFrames(instance: TextFrame, page: PageData): Promise<TextFrameData> {
     const textFrame: TextFrameData = new TextFrameData();
     textFrame.instance = instance;
 
-    const viewPreference = new ViewPreference();
+    textFrame.coordinatesPx.top = Number(instance.geometricBounds[0]) * global.dpi + page.bleedPx.top;
+    textFrame.coordinatesPx.left = Number(instance.geometricBounds[1]) * global.dpi + page.bleedPx.left;
+    textFrame.coordinatesPx.bottom = Number(instance.geometricBounds[2]) * global.dpi + page.bleedPx.top;
+    textFrame.coordinatesPx.right = Number(instance.geometricBounds[3]) * global.dpi + page.bleedPx.left;
 
-    viewPreference.toPixels()
-    textFrame.coordinatesPx.top = Number(instance.geometricBounds[0]);
-    textFrame.coordinatesPx.left = Number(instance.geometricBounds[1]);
-    textFrame.coordinatesPx.bottom = Number(instance.geometricBounds[2]);
-    textFrame.coordinatesPx.right = Number(instance.geometricBounds[3]);
+    textFrame.coordinatesIn.top = Number(instance.geometricBounds[0]) + page.bleedIn.top;
+    textFrame.coordinatesIn.left = Number(instance.geometricBounds[1]) + page.bleedIn.left;
+    textFrame.coordinatesIn.bottom = Number(instance.geometricBounds[2]) + page.bleedIn.top;
+    textFrame.coordinatesIn.right = Number(instance.geometricBounds[3]) + page.bleedIn.left;
 
-    viewPreference.toInches()
-    textFrame.coordinatesIn.top = Number(instance.geometricBounds[0]);
-    textFrame.coordinatesIn.left = Number(instance.geometricBounds[1]);
-    textFrame.coordinatesIn.bottom = Number(instance.geometricBounds[2]);
-    textFrame.coordinatesIn.right = Number(instance.geometricBounds[3]);
     textFrame.content = instance.contents.toString();
 
     if (instance.characters.length > 0) {
@@ -34,8 +31,8 @@ export async function findTextFrames(instance: TextFrame): Promise<TextFrameData
             const _colorCmyk = characterInstance.fillColor.colorValue as [number, number, number, number];
             const _colorRgb = cmyk2rgb(_colorCmyk);
             const colorHex = rgb2hex(_colorRgb);
-            const colorCmyk = `(${_colorCmyk.join(",")})`;
-            const colorRgb = `(${_colorRgb.join(",")})`;
+            const colorCmyk = `(${_colorCmyk.map(v => v.toFixed(global.decimals)).join(",")})`;
+            const colorRgb = `(${_colorRgb.map(v => v.toFixed(global.decimals)).join(",")})`;
             const letter = characterInstance.contents
 
             const fontKey = `${sizePx}-${fontFamily}-${fillColor}-${fontStyle}`;

@@ -4,7 +4,11 @@ import { LoggerService } from "../logger/logger.service";
 import { findPages } from "./find-pages";
 
 export async function documentDataExtract(): Promise<DocumentData> {
-    const data: DocumentData = { pages: [] };
+    const data: DocumentData = {
+        path: InDocument.filePath.name,
+        filename: InDocument.name,
+        pages: []
+    };
 
     LoggerService.setLog("Recognizing Pages");
     LoggerService.setLog(`${InDocument.pages.length} Pages found`);

@@ -6,16 +6,18 @@ export interface IGlobal {
     dpi: number
 }
 export interface DocumentData {
+    filename: string;
+    path: string;
     pages: PageData[]
 }
 export class PageData {
     instance: Page
     index: number
     name: string
-    boundsPx: number[]
-    boundsIn: number[]
-    width: ISize
-    height: ISize
+    boundsPx: IWidthHeight;
+    boundsIn: IWidthHeight;
+    boundsWithBleedPx: IWidthHeight;
+    boundsWithBleedIn: IWidthHeight;
     bleedPx: IBoundes
     bleedIn: IBoundes
     textFrames: TextFrameData[]
@@ -26,8 +28,6 @@ export class PageData {
         this.name = undefined
         this.boundsPx = undefined
         this.boundsIn = undefined
-        this.width = { inches: undefined, pixels: undefined, points: undefined }
-        this.height = { inches: undefined, pixels: undefined, points: undefined }
         this.bleedPx = { top: undefined, left: undefined, bottom: undefined, right: undefined }
         this.bleedIn = { top: undefined, left: undefined, bottom: undefined, right: undefined }
         this.textFrames = []
@@ -49,6 +49,10 @@ export interface IPointsSize {
 }
 export interface IInchesSize {
     inches: string | number
+}
+export interface IWidthHeight {
+    width: number;
+    height: number;
 }
 export class TextFrameData {
     instance: TextFrame
@@ -93,6 +97,5 @@ export interface ICoordinates {
 export interface ICheckboxes {
     genStencilFile: HTMLInputElement | undefined
     genWashedFile: HTMLInputElement | undefined
-    genIntermediateFile: HTMLInputElement | undefined
-    genDocumenDataFile: HTMLInputElement | undefined
+    genIntermediateFile: HTMLInputElement | undefined 
 }

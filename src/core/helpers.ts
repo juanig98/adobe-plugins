@@ -1,3 +1,5 @@
+import { global } from "./global";
+
 export const pointsToInches = (pt: string | number): number => parseInt(pt.toString()) / 72;
 
 export const pointsToPixels = (pt: string | number): number => parseInt(pt.toString()) * (4 / 3);
@@ -5,6 +7,8 @@ export const pointsToPixels = (pt: string | number): number => parseInt(pt.toStr
 export const inchesToPoints = (inc: string | number): number => parseInt(inc.toString()) * 72;
 
 export const inchesToPixels = (inc: string | number): number => parseInt(inc.toString()) * 96;
+
+export const prepareNumberToCsv = (val: string | number): number => Number(Number(val).toFixed(global.decimals))
 
 export const prepareTextToCsv = (text: string | number): string => {
     return text.toString()
@@ -81,29 +85,6 @@ export const cmyk2rgb = (CMYK: [number, number, number, number]): [number, numbe
 
     return [r, g, b];
 }
-
-// export const cmyk2rgb = (CMYK: [number, number, number, number]): [number, number, number] => {
-//     var C = CMYK[0]
-//     var M = CMYK[1]
-//     var Y = CMYK[2]
-//     var K = CMYK[3];
-
-//     var rgb_r,
-//         rgb_g,
-//         rgb_b,
-//         cyan = 100 * Number(C),
-//         magenta = 100 * Number(M),
-//         yellow = 100 * Number(Y),
-//         black = 100 * Number(K); // fixed a typo
-//     0 < cyan ? cyan /= 100 : 0 < magenta ? magenta /= 100 : 0 < yellow ? yellow /= 100 : 0 < black && (black /= 100);
-//     rgb_r = 1 - Math.min(1, cyan * (1 - black) + black);
-//     rgb_g = 1 - Math.min(1, magenta * (1 - black) + black);
-//     rgb_b = 1 - Math.min(1, yellow * (1 - black) + black);
-//     rgb_r = Math.round(255 * rgb_r);
-//     rgb_g = Math.round(255 * rgb_g);
-//     rgb_b = Math.round(255 * rgb_b);
-//     return [rgb_r, rgb_g, rgb_b];
-// }
 
 export const areAllEqual = (
     a: string | number,

@@ -16,10 +16,13 @@ export const fsProvider = uxp.storage.localFileSystem
 
 export const InApp: InApplication = app;
 
-export const InDocument: InDocument = app.activeDocument;
+export let InDocument: InDocument = app.activeDocument;
 
 
 export const setGlobals = () => {
+    InDocument = InApp.activeDocument;
+    global.originalFilename = (<any>InDocument.properties).name;
+    global.originalFilenameWithoutExtension = (<any>InDocument.properties).name.replace(/\.[^/.]+$/, "");
     global.decimals = Number((document.getElementById('decimals') as HTMLInputElement).value);
     global.dpi = Number((document.getElementById('dpi') as HTMLInputElement).value);
 }

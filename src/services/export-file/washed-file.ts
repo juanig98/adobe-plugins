@@ -4,6 +4,7 @@ import { ExportFormat } from "indesign";
 import { LoggerService } from "../logger/logger.service";
 import { PPDPDFExportPreset } from "./pdf-export-preset";
 import { exportIntermediateFile } from "./intermediate-file";
+import fs from 'fs';
 
 export const exportWashedFile = async (documentData: DocumentData, generateIntermediateFile: boolean = false) => {
     if (!global) {
@@ -13,9 +14,18 @@ export const exportWashedFile = async (documentData: DocumentData, generateInter
 
     LoggerService.setLog("Setting file");
 
+    const input = document.getElementById('textsIgnorePath') as HTMLInputElement
+    const file = fs.readFileSync(input.value, { encoding: 'utf-8' })
+    const ignoreData: string[] = [];
+    
+    file.toString().split('\n').forEach(line => {
+        ignoreData.push(line);
+    });
+
     documentData.pages.forEach(page => {
         page.textFrames.forEach(tf => {
-            tf.instance.visible = false;
+            if (!ignoreData.includes(tf.content))
+                tf.instance.visible = false;
         });
         page.textBubbles.forEach(tb => {
             tb.instance.visible = false;
@@ -43,10 +53,10 @@ export const exportWashedFile = async (documentData: DocumentData, generateInter
 
     documentData.pages.forEach(page => {
         page.textFrames.forEach(tf => {
-            tf.instance.visible = false;
+            tf.instance.visible = true;
         });
         page.textBubbles.forEach(tb => {
-            tb.instance.visible = false;
+            tb.instance.visible = true;
         })
     });
 }

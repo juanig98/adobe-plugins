@@ -27,6 +27,10 @@
     align-items: center;
   }
 
+  .form__group__block {
+    display: block;
+  }
+
   .buttons {
     width: 100%;
     margin-top: 25px;
@@ -47,12 +51,29 @@
     color: rgb(180, 180, 180);
     text-align: center;
   }
+
   .dialog h1 {
     color: rgb(255, 255, 255);
   }
 
   .dialog p {
     margin-top: 20px;
+  }
+
+  .panel {
+    margin-bottom: 10px;
+    border: 1px solid #b0b0b0;
+    /* bg phto #535353 */
+    border-radius: 6px;
+    padding: 5px;
+  }
+
+  .border-dark {
+    border: 1px dotted #696969;
+  }
+
+  .panel-legend {
+    margin-top: -50px;
   }
 </style>
 
@@ -61,40 +82,79 @@
     <sp-heading>PreProcess Design</sp-heading>
     <form>
       <sp-body>
-        
-        <div class="legend">File generation</div>
-        <div class="form__group">
-          <input type="checkbox" id="genStencilFile" name="genStencilFile" checked>
-          <label for="genStencilFile">Generate stencil file (.pdf) </label>
+
+        <div class="panel">
+          <div class="legend">File generation</div>
+          <div class="form__group">
+            <input type="checkbox" id="genStencilFile" name="genStencilFile" checked>
+            <label for="genStencilFile">Generate stencil file (.pdf) </label>
+          </div>
+          <div class="form__group">
+            <input type="checkbox" id="genWashedFile" name="genWashedFile" checked>
+            <label for="genWashedFile">Generate washed file (.pdf) </label>
+          </div>
+          <div class="form__group">
+            <input type="checkbox" id="genIntermediateFile" name="genIntermediateFile" checked>
+            <label for="genIntermediateFile">Generate intermediate file (.indd) </label>
+          </div>
+          <div class="buttons">
+            <sp-button variant="primary" id="btnGenerateFiles">Generate files</sp-button>
+          </div>
         </div>
-        <div class="form__group">
-          <input type="checkbox" id="genWashedFile" name="genWashedFile" checked>
-          <label for="genWashedFile">Generate washed file (.pdf) </label>
+
+        <div class="panel">
+          <div class="legend">Document data</div>
+          <div class="form__group">
+            <input type="radio" id="genDocDataSelectorAll" name="genDocDataSelector" value="ALL" checked>
+            <label for="genDocDataSelectorAll">All document opened</label>
+          </div>
+          <div class="form__group">
+            <input type="radio" id="genDocDataSelectorOnlyActive" name="genDocDataSelector" value="ONLY_ACTIVE">
+            <label for="genDocDataSelectorOnlyActive">Only active document </label>
+          </div>
+          <div class="buttons">
+            <sp-button variant="second" id="btnGenerateDocumentData">Generate</sp-button>
+          </div>
         </div>
-        <div class="form__group">
-          <input type="checkbox" id="genIntermediateFile" name="genIntermediateFile" checked>
-          <label for="genIntermediateFile">Generate intermediate file (.indd) </label>
+
+        <div class="panel">
+          <div class="legend">Texts data</div>
+          <div class="form__group">
+            <input type="radio" id="genTextDataSelectorAll" name="genTextDataSelector" value="ALL" checked>
+            <label for="genTextDataSelectorAll">All document opened</label>
+          </div>
+          <div class="form__group">
+            <input type="radio" id="genTextDataSelectorOnlyActive" name="genTextDataSelector" value="ONLY_ACTIVE">
+            <label for="genTextDataSelectorOnlyActive">Only active document </label>
+          </div>
+          <div class="buttons">
+            <sp-button variant="second" id="btnGenerateTextData">Generate</sp-button>
+          </div>
         </div>
-        
-        <div class="legend">Document data</div>
-        <div class="form__group">
-          <input type="checkbox" id="genDocumenDataFile" name="genDocumenDataFile" checked>
-          <label for="genDocumenDataFile">Generate document data csv file </label>
-        </div>
-       
-        <div class="legend">General</div>
-        <div class="form__group">
-          <label for="decimals">Number of decimals </label>
-          <input type="number" value="4" min="1" max="9" id="decimals" name="decimals" required style="width: 24px;font-size: 12px;">
-        </div>
-        <div class="form__group">
-          <label for="dpi">DPI </label>
-          <input type="number" value="600" min="1" max="2400" id="dpi" name="dpi" required style="width: 32px;font-size: 12px;">
+
+
+        <div class="panel border-dark">
+          <div class="legend">General</div>
+
+          <div class="form__group">
+            <label for="decimals" style="width: 60px;">Decimals </label>
+            <input type="number" value="4" min="1" max="9" id="decimals" name="decimals" required
+              style="width: 24px;font-size: 12px;">
+          </div>
+          <div class="form__group">
+            <label for="dpi" style="width: 60px;">DPI </label>
+            <input type="number" value="600" min="1" max="2400" id="dpi" name="dpi" required
+              style="width: 32px;font-size: 12px;">
+          </div>
+          <div class="form__group__block">
+            <label for="textsIgnorePath">Text ignore path </label> <br />
+            <input type="text" value="C:\\ignore.data" id="textsIgnorePath" name="textsIgnorePath" style="width: 90%;"
+              required>
+          </div>
         </div>
 
         <div class="buttons">
           <sp-button variant="second" id="btnTest" style="margin-right: 10px;">Test</sp-button>
-          <sp-button variant="primary" id="btnExecute">Execute</sp-button>
         </div>
 
       </sp-body>
@@ -105,6 +165,10 @@
         </div>
       </footer>
     </form>
+  </div>
+
+  <div>
+    <table id="tableInfo"></table>
   </div>
 
   <dialog id="dialog" class="dialog">
