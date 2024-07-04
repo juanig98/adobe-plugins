@@ -1,4 +1,4 @@
-import { InApp, setGlobals } from "../../core/global";
+import { fsProvider, InApp, setGlobals } from "../../core/global";
 import { prepareNumberToCsv, areAllEqual } from "../../core/helpers";
 import { DocumentData } from "../../models/types";
 import { CsvService } from "../csv/csv.service";
@@ -6,6 +6,8 @@ import { DocumentService } from "../document/document.service";
 
 export class ExportDocumentDataService {
     async export(allDocuments: boolean): Promise<void> {
+        const file = await fsProvider.getFileForSaving("export-texts-data.csv", { types: ["csv", "txt"] });
+        
         const data: DocumentData[] = [];
         const docService = new DocumentService();
 
@@ -41,6 +43,6 @@ export class ExportDocumentDataService {
         });
 
         const excelService = new CsvService();
-        await excelService.toCsv(headers, rows, "document-data");
+        await excelService.toCsv(file, headers, rows);
     }
 }

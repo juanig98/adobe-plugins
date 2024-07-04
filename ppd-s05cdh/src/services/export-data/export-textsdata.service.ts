@@ -1,11 +1,17 @@
-import { InApp, setGlobals } from "../../core/global";
+import { fsProvider, InApp, setGlobals } from "../../core/global";
 import { prepareNumberToCsv, areAllEqual } from "../../core/helpers";
 import { DocumentData } from "../../models/types";
 import { CsvService } from "../csv/csv.service";
 import { DocumentService } from "../document/document.service";
 
 export class ExportTextsDataService {
+   
     async export(allDocuments: boolean): Promise<void> {
+        const file = await fsProvider.getFileForSaving("export-texts-data.csv", { types: ["csv", "txt"] });
+
+        if (!file)
+            return;
+
         const data: DocumentData[] = [];
         const docService = new DocumentService();
 
@@ -32,8 +38,8 @@ export class ExportTextsDataService {
                         const row = [];
                         row.push(docData.filename);
                         row.push(`${page.name} (${page.index + 1})`);
-                        row.push(tf.content);
-                        row.push(text);
+                        row.push(tf.content.replace(/[\n\r\t\\]/g, ''));
+                        row.push(text.replace(/[\n\r\t\\]/g, ''));
                         row.push(prepareNumberToCsv(tf.fonts[index].sizePt));
                         row.push(prepareNumberToCsv(tf.fonts[index].sizePx));
                         row.push(tf.fonts[index].fontFamily);
@@ -56,6 +62,6 @@ export class ExportTextsDataService {
         });
 
         const excelService = new CsvService();
-        await excelService.toCsv(headers, rows, "document-data");
+        await excelService.toCsv(file, headers, rows);
     }
 }

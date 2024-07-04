@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="dist/main.js"></script>
+</head>
+<style>
+  .wrapper {
+    position: absolute;
+    flex-direction: column;
+    display: flex;
+    padding: 12px;
+    color: white;
+    width: 100vw;
+  }
+
+  .grid {
+    display: block;
+  }
+
+  .legend {
+    font-weight: 700;
+  }
+
+  .form__group {
+    display: flex;
+    align-items: center;
+  }
+
+  .form__group__block {
+    display: block;
+  }
+
+  .buttons {
+    width: 100%;
+    margin-top: 25px;
+    padding-right: 25px;
+    display: inline-flex;
+    justify-content: end;
+  }
+
+  .logger-container {
+    width: 100vw;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .dialog {
+    color: rgb(180, 180, 180);
+    text-align: center;
+  }
+
+  .dialog h1 {
+    color: rgb(255, 255, 255);
+  }
+
+  .dialog p {
+    margin-top: 20px;
+  }
+
+  .panel {
+    margin-bottom: 10px;
+    border: 1px solid #b0b0b0;
+    /* bg phto #535353 */
+    border-radius: 6px;
+    padding: 5px;
+  }
+
+  .border-dark {
+    border: 1px dotted #696969;
+  }
+
+  .panel-legend {
+    margin-top: -50px;
+  }
+</style>
+
+<body>
+  <div class="wrapper">
+    <sp-heading>PreProcess Design</sp-heading>
+    <form>
+      <sp-body>
+ 
+
+        <div class="buttons">
+          <sp-button variant="second" id="btnTest" style="margin-right: 10px;">Test</sp-button>
+        </div>
+      </sp-body>
+      <footer>
+        <div class="logger-container">
+          <span id="task"></span> <br />
+          <span id="taskLogger"></span>
+        </div>
+      </footer>
+    </form>
+  </div>
+
+  <div>
+    <table id="tableInfo"></table>
+  </div>
+
+  <dialog id="dialog" class="dialog">
+    <div>
+      <h1 id="dialogTitle"></h1>
+      <p id="dialogContent"></p>
+    </div>
+  </dialog>
+</body>
+
+</html>
