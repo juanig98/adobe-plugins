@@ -1,0 +1,90 @@
+.wrapper {
+  position: absolute;
+  flex-direction: column;
+  display: flex;
+  padding: 12px;
+  color: white;
+  width: 100vw;
+}
+
+.grid {
+  display: block;
+}
+
+.legend {
+  font-weight: 700;
+}
+
+.form-group-1 {
+  display: flex;
+  align-items: center;
+}
+
+.form-group-1__block {
+  display: block;
+}
+
+.buttons {
+  width: 100%;
+  margin-top: 25px;
+  padding-right: 25px;
+  display: inline-flex;
+  justify-content: end;
+}
+
+.logger-container {
+  width: 100vw;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dialog {
+  color: rgb(180, 180, 180);
+  text-align: center;
+}
+
+.dialog h1 {
+  color: rgb(255, 255, 255);
+}
+
+.dialog p {
+  margin-top: 20px;
+}
+
+.panel {
+  margin-bottom: 10px;
+  border: 1px solid #b0b0b0;
+  /* bg phto #535353 */
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.border-dark {
+  border: 1px dotted #696969;
+}
+
+.panel-legend {
+  margin-top: -50px;
+}
+
+label {
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 0.1rem;
+}
+
+.form-group {
+  margin-bottom: 0.125rem;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.2rem;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}

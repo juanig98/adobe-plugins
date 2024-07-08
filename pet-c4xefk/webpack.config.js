@@ -17,7 +17,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     externals: {
-        indesign: 'commonjs2 photoshop', 
+        photoshop: 'commonjs2 photoshop', 
         uxp: 'commonjs2 uxp',
         os: 'commonjs2 os',
         fs: 'commonjs2 fs',

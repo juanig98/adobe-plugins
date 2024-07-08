@@ -3,86 +3,37 @@
 
 <head>
   <script src="dist/main.js"></script>
+
+  <link rel="stylesheet" href="./style.css">
 </head>
-<style>
-  .wrapper {
-    position: absolute;
-    flex-direction: column;
-    display: flex;
-    padding: 12px;
-    color: white;
-    width: 100vw;
-  }
-
-  .grid {
-    display: block;
-  }
-
-  .legend {
-    font-weight: 700;
-  }
-
-  .form__group {
-    display: flex;
-    align-items: center;
-  }
-
-  .form__group__block {
-    display: block;
-  }
-
-  .buttons {
-    width: 100%;
-    margin-top: 25px;
-    padding-right: 25px;
-    display: inline-flex;
-    justify-content: end;
-  }
-
-  .logger-container {
-    width: 100vw;
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  .dialog {
-    color: rgb(180, 180, 180);
-    text-align: center;
-  }
-
-  .dialog h1 {
-    color: rgb(255, 255, 255);
-  }
-
-  .dialog p {
-    margin-top: 20px;
-  }
-
-  .panel {
-    margin-bottom: 10px;
-    border: 1px solid #b0b0b0;
-    /* bg phto #535353 */
-    border-radius: 6px;
-    padding: 5px;
-  }
-
-  .border-dark {
-    border: 1px dotted #696969;
-  }
-
-  .panel-legend {
-    margin-top: -50px;
-  }
-</style>
 
 <body>
   <div class="wrapper">
     <sp-heading>PreProcess Design</sp-heading>
     <form>
       <sp-body>
- 
+        <div style="margin: 20px; text-align: right;">
+          <a href="#" id="configEdit">Config</a>
+        </div>
+
+        <div class="panel">
+          <div class="legend">Script</div>
+
+          <div class="form-group-1">
+            <label for="assetPackName" style="width: 140px;">AssetPack Name: </label>
+            <input type="text" value="" id="assetPackName" name="assetPackName"
+              style="width: 80%;padding:1px;border-radius: 3px;">
+          </div>
+
+          <div class="form-group-1">
+            <label for="assetFolder" style="width: 140px;">Asset Folder: </label>
+            <input type="text" value="" id="assetFolder" name="assetFolder"
+              style="width: 80%;padding:1px;border-radius: 3px;">
+          </div>
+          <div class="buttons">
+            <sp-button variant="second" id="runScript" style="margin-right: 10px;">Run</sp-button>
+          </div>
+        </div>
 
         <div class="buttons">
           <sp-button variant="second" id="btnTest" style="margin-right: 10px;">Test</sp-button>
@@ -97,14 +48,9 @@
     </form>
   </div>
 
-  <div>
-    <table id="tableInfo"></table>
-  </div>
-
   <dialog id="dialog" class="dialog">
-    <div>
-      <h1 id="dialogTitle"></h1>
-      <p id="dialogContent"></p>
+    <h1 id="dialogTitle"></h1>
+    <div id="dialogContent">
     </div>
   </dialog>
 </body>

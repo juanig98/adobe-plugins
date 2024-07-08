@@ -10,7 +10,7 @@
     },
     "devDependencies": {
       "@types/node": "^20.14.2",
-      "@types/photoshop": "^23.0.0",
+      "@types/photoshop": "^25.0.4",
       "esbuild": "^0.21.5",
       "ts-loader": "^9.2.6",
       "ts-node": "^10.9.2",

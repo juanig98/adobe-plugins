@@ -10,7 +10,8 @@
     }
   ],
   "requiredPermissions": {
-    "localFileSystem": "fullAccess"
+    "localFileSystem": "fullAccess",
+    "enableUserInfo": true
   },
   "manifestVersion": 5,
   "entrypoints": [
